@@ -3,9 +3,9 @@
 /node_modules
 /build
 
-# Yarn PnP
-.pnp.*
+# Yarn PnP (Zero-Install)
 .yarn/*
+!.yarn/cache
 !.yarn/patches
 !.yarn/plugins
 !.yarn/releases
