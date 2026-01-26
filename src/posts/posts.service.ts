@@ -101,11 +101,11 @@ export class PostsService {
     return await this.postsRepository.save(post);
   }
 
-  deletePost(id: number): void {
-    const postIndex = this.posts.findIndex((post) => post.id === id);
-    if (postIndex === -1) {
+  async deletePost(id: number) {
+    const result = await this.postsRepository.delete(id);
+    if (result.affected === 0) {
       throw new NotFoundException('Post not found');
     }
-    this.posts.splice(postIndex, 1);
+    return id;
   }
 }
