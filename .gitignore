@@ -78,3 +78,6 @@ Thumbs.db
 
 # Additional env files
 .env.staging
+
+# Postgres
+postgres-data/
