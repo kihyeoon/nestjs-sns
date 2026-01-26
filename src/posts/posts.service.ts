@@ -71,17 +71,19 @@ export class PostsService {
     return await this.postsRepository.save(post);
   }
 
-  updatePost(id: number, post: PostModel): PostModel {
-    const postIndex = this.posts.findIndex((p) => p.id === id);
-    if (postIndex === -1) {
+  async updatePost(id: number, post: PostModel) {
+    // Save 의 기능
+    // 1) 데이터가 존재하지 않는다면(id 기준) 새로 생성한다.
+    // 2) 같은 id 가 존재한다면 데이터를 업데이트 한다.
+    const existingPost = await this.postsRepository.findOne({ where: { id } });
+    if (!existingPost) {
       throw new NotFoundException('Post not found');
     }
-    this.posts[postIndex] = post;
-    return this.posts[postIndex];
+    return await this.postsRepository.save({ ...existingPost, ...post });
   }
 
-  patchPost(id: number, author?: string, title?: string, content?: string): PostModel {
-    const post = this.posts.find((p) => p.id === id);
+  async patchPost(id: number, author?: string, title?: string, content?: string) {
+    const post = await this.postsRepository.findOne({ where: { id } });
     if (!post) {
       throw new NotFoundException('Post not found');
     }
@@ -96,7 +98,7 @@ export class PostsService {
       post.content = content;
     }
 
-    return post;
+    return await this.postsRepository.save(post);
   }
 
   deletePost(id: number): void {

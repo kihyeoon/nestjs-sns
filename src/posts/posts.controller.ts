@@ -1,6 +1,6 @@
 import { Controller, Get, Param, Post, Body, Put, Patch, Delete } from '@nestjs/common';
-import type { PostModel } from './posts.service';
 import { PostsService } from './posts.service';
+import { PostsModel } from './entities/posts.entity';
 
 @Controller('posts')
 export class PostsController {
@@ -26,7 +26,7 @@ export class PostsController {
   }
 
   @Put(':id')
-  updatePost(@Param('id') id: string, @Body() post: PostModel): PostModel {
+  updatePost(@Param('id') id: string, @Body() post: PostsModel) {
     return this.postsService.updatePost(Number(id), post);
   }
 
@@ -36,7 +36,7 @@ export class PostsController {
     @Body('author') author?: string,
     @Body('title') title?: string,
     @Body('content') content?: string,
-  ): PostModel {
+  ) {
     return this.postsService.patchPost(Number(id), author, title, content);
   }
 
