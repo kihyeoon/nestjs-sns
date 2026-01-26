@@ -12,7 +12,7 @@ export class PostsController {
   }
 
   @Get(':id')
-  getPostById(@Param('id') id: string): PostModel {
+  getPostById(@Param('id') id: string) {
     return this.postsService.getPostById(Number(id));
   }
 
