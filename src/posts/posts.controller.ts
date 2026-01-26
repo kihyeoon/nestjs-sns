@@ -21,7 +21,7 @@ export class PostsController {
     @Body('author') author: string,
     @Body('title') title: string,
     @Body('content') content: string,
-  ): PostModel {
+  ) {
     return this.postsService.createPost(author, title, content);
   }
 
