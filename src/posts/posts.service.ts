@@ -46,8 +46,8 @@ export class PostsService {
     },
   ];
 
-  getAllPosts(): PostModel[] {
-    return this.posts;
+  async getAllPosts() {
+    return this.postsRepository.find();
   }
 
   getPostById(id: number): PostModel {

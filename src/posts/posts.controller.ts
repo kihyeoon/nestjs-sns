@@ -1,13 +1,4 @@
-import {
-  Controller,
-  Get,
-  Param,
-  Post,
-  Body,
-  Put,
-  Patch,
-  Delete,
-} from '@nestjs/common';
+import { Controller, Get, Param, Post, Body, Put, Patch, Delete } from '@nestjs/common';
 import type { PostModel } from './posts.service';
 import { PostsService } from './posts.service';
 
@@ -16,7 +7,7 @@ export class PostsController {
   constructor(private readonly postsService: PostsService) {}
 
   @Get()
-  getPosts(): PostModel[] {
+  async getPosts() {
     return this.postsService.getAllPosts();
   }
 
