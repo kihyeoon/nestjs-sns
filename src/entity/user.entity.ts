@@ -15,7 +15,18 @@ export class UserModel {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  // 일반 컬럼
+  /**
+   * @Column 주요 옵션:
+   * - type: 컬럼 타입 ('varchar', 'int', 'boolean', 'text', 'json' 등)
+   * - nullable: null 허용 여부 (기본값: false)
+   * - default: 기본값 설정
+   * - unique: 유니크 제약 조건
+   * - length: 문자열 최대 길이 (varchar 등)
+   * - name: 실제 DB 컬럼명 지정 (기본값: 프로퍼티명)
+   * - select: find 시 기본 조회 포함 여부 (기본값: true)
+   * - update: update 시 변경 허용 여부 (기본값: true)
+   * - enum: enum 타입 사용 시 값 배열
+   */
   @Column()
   title: string;
 
