@@ -8,6 +8,11 @@ import {
   Generated,
 } from 'typeorm';
 
+export enum Role {
+  ADMIN = 'admin',
+  USER = 'user',
+}
+
 // 데이터베이스 테이블로 매핑되는 클래스 선언
 @Entity()
 export class UserModel {
@@ -27,6 +32,13 @@ export class UserModel {
    * - update: update 시 변경 허용 여부 (기본값: true)
    * - enum: enum 타입 사용 시 값 배열
    */
+  @Column({
+    type: 'enum',
+    enum: Role,
+    default: Role.USER,
+  })
+  role: Role;
+
   @Column()
   title: string;
 
