@@ -3,6 +3,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModel } from './entity/user.entity';
+import { StudentModel } from 'src/person/student.entity';
+import { TeacherModel } from 'src/person/teacher.entity';
 
 @Module({
   imports: [
@@ -14,7 +16,7 @@ import { UserModel } from './entity/user.entity';
       username: 'postgres', // 데이터베이스 접속 사용자명
       password: 'postgres', // 데이터베이스 접속 비밀번호
       database: 'typeorm-study', // 사용할 데이터베이스 이름
-      entities: [UserModel], // Entity 클래스 배열 (자동 매핑할 테이블)
+      entities: [UserModel, StudentModel, TeacherModel], // Entity 클래스 배열 (자동 매핑할 테이블)
       synchronize: true, // Entity와 DB 스키마 자동 동기화 (개발용, 프로덕션에서는 false)
     }),
   ],
