@@ -1,3 +1,4 @@
+import { ProfileModel } from 'src/entity/profile.entity';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -6,6 +7,7 @@ import {
   UpdateDateColumn,
   VersionColumn,
   Generated,
+  OneToOne,
 } from 'typeorm';
 
 export enum Role {
@@ -58,4 +60,10 @@ export class UserModel {
   @Column()
   @Generated('increment')
   additionalId: number;
+
+  @Column()
+  email: string;
+
+  @OneToOne(() => ProfileModel, (profile: ProfileModel) => profile.user)
+  profile: ProfileModel;
 }
