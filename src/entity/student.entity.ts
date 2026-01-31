@@ -1,15 +1,11 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
-import { Name } from './name.embedded';
+import { NameBase } from './name.base';
 
 @Entity()
-export class StudentModel {
+export class StudentModel extends NameBase {
   @PrimaryGeneratedColumn('uuid')
   id: string;
-
-  // 임베디드 컬럼: name_last_name, name_first_name
-  @Column(() => Name)
-  name: Name;
 
   @Column({ type: 'int' })
   grade: number;

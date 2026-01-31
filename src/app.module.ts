@@ -3,8 +3,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModel } from './entity/user.entity';
-import { StudentModel } from 'src/person/student.entity';
-import { TeacherModel } from 'src/person/teacher.entity';
+import { StudentModel } from './entity/student.entity';
+import { TeacherModel } from './entity/teacher.entity';
 
 @Module({
   imports: [
