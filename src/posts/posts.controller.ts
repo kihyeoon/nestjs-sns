@@ -1,6 +1,5 @@
 import { Controller, Get, Param, Post, Body, Put, Patch, Delete } from '@nestjs/common';
 import { PostsService } from './posts.service';
-import { PostsModel } from './entities/posts.entity';
 
 @Controller('posts')
 export class PostsController {
@@ -18,26 +17,29 @@ export class PostsController {
 
   @Post()
   createPost(
-    @Body('author') author: string,
+    @Body('authorId') authorId: number,
     @Body('title') title: string,
     @Body('content') content: string,
   ) {
-    return this.postsService.createPost(author, title, content);
+    return this.postsService.createPost(authorId, title, content);
   }
 
   @Put(':id')
-  updatePost(@Param('id') id: string, @Body() post: PostsModel) {
-    return this.postsService.updatePost(Number(id), post);
+  updatePost(
+    @Param('id') id: string,
+    @Body('title') title: string,
+    @Body('content') content: string,
+  ) {
+    return this.postsService.updatePost(Number(id), title, content);
   }
 
   @Patch(':id')
   patchPost(
     @Param('id') id: string,
-    @Body('author') author?: string,
     @Body('title') title?: string,
     @Body('content') content?: string,
   ) {
-    return this.postsService.patchPost(Number(id), author, title, content);
+    return this.postsService.patchPost(Number(id), title, content);
   }
 
   @Delete(':id')
