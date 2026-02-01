@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { UserModel } from './entity/user.entity';
 import { ProfileModel } from './entity/profile.entity';
 import { PostModel } from './entity/post.entity';
+import { TagModel } from './entity/tag.entity';
 
 @Controller()
 export class AppController {
@@ -11,6 +12,7 @@ export class AppController {
     @InjectRepository(UserModel) private userRepository: Repository<UserModel>,
     @InjectRepository(ProfileModel) private profileRepository: Repository<ProfileModel>,
     @InjectRepository(PostModel) private postRepository: Repository<PostModel>,
+    @InjectRepository(TagModel) private tagRepository: Repository<TagModel>,
   ) {}
 
   @Get('users')
@@ -79,6 +81,48 @@ export class AppController {
       ...user,
       post1,
       post2,
+    };
+  }
+
+  @Get('posts')
+  async getPosts() {
+    return this.postRepository.find({
+      relations: {
+        tags: true,
+      },
+    });
+  }
+
+  @Post('post/tags')
+  async createPostsAndTags() {
+    const post1 = await this.postRepository.save({
+      title: 'test',
+      content: 'test',
+    });
+    const post2 = await this.postRepository.save({
+      title: 'test2',
+      content: 'test2',
+    });
+    const tag1 = await this.tagRepository.save({
+      name: 'JavaScript',
+      posts: [post1, post2],
+    });
+    const tag2 = await this.tagRepository.save({
+      name: 'TypeScript',
+      posts: [post1],
+    });
+    const post3 = await this.postRepository.save({
+      title: 'test3',
+      content: 'test3',
+      tags: [tag1, tag2],
+    });
+
+    return {
+      ...post1,
+      ...post2,
+      ...post3,
+      tag1,
+      tag2,
     };
   }
 }
