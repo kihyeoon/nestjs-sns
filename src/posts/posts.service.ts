@@ -19,33 +19,6 @@ export class PostsService {
     private readonly postsRepository: Repository<PostsModel>,
   ) {}
 
-  private posts: PostModel[] = [
-    {
-      id: 1,
-      author: 'author1',
-      title: 'title1',
-      content: 'content1',
-      likeCount: 0,
-      commentCount: 0,
-    },
-    {
-      id: 2,
-      author: 'author2',
-      title: 'title2',
-      content: 'content2',
-      likeCount: 0,
-      commentCount: 0,
-    },
-    {
-      id: 3,
-      author: 'author3',
-      title: 'title3',
-      content: 'content3',
-      likeCount: 0,
-      commentCount: 0,
-    },
-  ];
-
   async getAllPosts() {
     return this.postsRepository.find();
   }
