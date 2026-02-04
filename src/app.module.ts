@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { PostsModel } from 'src/posts/entities/posts.entity';
 import { UsersModule } from './users/users.module';
 import { UsersModel } from './users/entities/users.entity';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { UsersModel } from './users/entities/users.entity';
       synchronize: true, // Entity와 DB 스키마 자동 동기화 (개발용, 프로덕션에서는 false)
     }),
     UsersModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
