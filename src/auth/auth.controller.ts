@@ -5,6 +5,24 @@ import { AuthService } from './auth.service';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
+  @Post('token/access')
+  rotateAccessToken(@Headers('authorization') header: string) {
+    const token = this.authService.extractTokenFromHeader(header, true);
+
+    const newAccessToken = this.authService.rotateToken(token, false);
+
+    return { accessToken: newAccessToken };
+  }
+
+  @Post('token/refresh')
+  rotateRefreshToken(@Headers('authorization') header: string) {
+    const token = this.authService.extractTokenFromHeader(header, true);
+
+    const newRefreshToken = this.authService.rotateToken(token, true);
+
+    return { refreshToken: newRefreshToken };
+  }
+
   @Post('login/email')
   async loginWithEmail(@Headers('authorization') header: string) {
     const token = this.authService.extractTokenFromHeader(header, false);

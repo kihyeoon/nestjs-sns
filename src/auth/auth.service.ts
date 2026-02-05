@@ -5,6 +5,12 @@ import { HASH_ROUNDS, JWT_SECRET } from './const/auth.const';
 import { UsersService } from 'src/users/users.service';
 import * as bcrypt from 'bcrypt';
 
+interface JwtPayload {
+  email: string;
+  sub: number;
+  type: 'access' | 'refresh';
+}
+
 @Injectable()
 export class AuthService {
   /**
@@ -44,7 +50,7 @@ export class AuthService {
    * 3) type -> accessToken 또는 refreshToken
    */
   signToken(user: Pick<UsersModel, 'email' | 'id'>, isRefreshToken: boolean) {
-    const payload = {
+    const payload: JwtPayload = {
       email: user.email,
       sub: user.id,
       type: isRefreshToken ? 'refresh' : 'access',
@@ -135,5 +141,21 @@ export class AuthService {
     }
 
     return { email, password };
+  }
+
+  verifyToken(token: string) {
+    return this.jwtService.verify<JwtPayload>(token, {
+      secret: JWT_SECRET,
+    });
+  }
+
+  rotateToken(token: string, isRefreshToken: boolean) {
+    const decoded = this.verifyToken(token);
+
+    if (decoded.type !== 'refresh') {
+      throw new UnauthorizedException('refreshToken으로만 토큰 갱신이 가능합니다.');
+    }
+
+    return this.signToken({ email: decoded.email, id: decoded.sub }, isRefreshToken);
   }
 }
