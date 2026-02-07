@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 프로젝트 개요
 
-SNS 앱 개발을 위한 NestJS 학습용 프로젝트입니다. Yarn PnP Zero-Install 설정을 사용합니다.
+NestJS 학습을 위한 SNS 앱 프로젝트입니다. Yarn PnP Zero-Install 설정을 사용합니다.
 
 ## 주요 명령어
 
