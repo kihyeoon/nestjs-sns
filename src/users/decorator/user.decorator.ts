@@ -3,14 +3,16 @@ import { InternalServerErrorException } from '@nestjs/common';
 import { UsersModel } from '../entities/users.entity';
 import { Request } from 'express';
 
-export const User = createParamDecorator((_data: unknown, ctx: ExecutionContext) => {
-  const request = ctx.switchToHttp().getRequest<Request & { user: UsersModel }>();
+export const User = createParamDecorator(
+  (data: keyof UsersModel | undefined, ctx: ExecutionContext) => {
+    const request = ctx.switchToHttp().getRequest<Request & { user: UsersModel }>();
 
-  const user = request.user;
+    const user = request.user;
 
-  if (!user) {
-    throw new InternalServerErrorException('Request에 user 정보가 없습니다.');
-  }
+    if (!user) {
+      throw new InternalServerErrorException('Request에 user 정보가 없습니다.');
+    }
 
-  return user;
-});
+    return data ? user[data] : user;
+  },
+);
