@@ -1,11 +1,9 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, Column, ManyToOne, JoinColumn } from 'typeorm';
 import { UsersModel } from 'src/users/entities/users.entity';
+import { BaseEntity } from 'src/common/entity/base.entity';
 
 @Entity()
-export class PostsModel {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class PostsModel extends BaseEntity {
   @ManyToOne(() => UsersModel, (user) => user.posts, { nullable: false })
   @JoinColumn({ name: 'authorId' })
   author: UsersModel;
