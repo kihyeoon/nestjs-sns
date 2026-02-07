@@ -66,6 +66,7 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
 # Claude Code
 .claude/
+.omc/
 
 # TypeScript
 *.tsbuildinfo

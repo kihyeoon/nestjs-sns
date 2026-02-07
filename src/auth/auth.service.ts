@@ -144,9 +144,16 @@ export class AuthService {
   }
 
   verifyToken(token: string) {
-    return this.jwtService.verify<JwtPayload>(token, {
-      secret: JWT_SECRET,
-    });
+    try {
+      return this.jwtService.verify<JwtPayload>(token, {
+        secret: JWT_SECRET,
+      });
+    } catch (e) {
+      if (e instanceof Error && e.name === 'TokenExpiredError') {
+        throw new UnauthorizedException('토큰이 만료되었습니다.');
+      }
+      throw new UnauthorizedException('유효하지 않은 토큰입니다.');
+    }
   }
 
   rotateToken(token: string, isRefreshToken: boolean) {
