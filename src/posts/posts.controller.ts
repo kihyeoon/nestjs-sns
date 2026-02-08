@@ -27,6 +27,12 @@ export class PostsController {
     return this.postsService.paginatePosts(paginatePostDto);
   }
 
+  @Post('random')
+  @UseGuards(AccessTokenGuard)
+  generatePosts(@User('id') userId: number) {
+    return this.postsService.generatePosts(userId);
+  }
+
   @Get(':id')
   getPostById(@Param('id', ParseIntPipe) id: number) {
     return this.postsService.getPostById(id);

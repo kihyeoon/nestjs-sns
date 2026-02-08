@@ -48,6 +48,20 @@ export class PostsService {
     return posts;
   }
 
+  async generatePosts(authorId: number) {
+    const posts = Array.from({ length: 100 }, (_, i) =>
+      this.postsRepository.create({
+        author: { id: authorId },
+        title: `임의 포스트 ${i + 1}`,
+        content: `임의로 생성된 포스트 내용 ${i + 1}`,
+        likeCount: Math.floor(Math.random() * 100),
+        commentCount: Math.floor(Math.random() * 50),
+      }),
+    );
+
+    return this.postsRepository.save(posts);
+  }
+
   async createPost(authorId: number, createPostDto: CreatePostDto) {
     // 1) create: 저장할 객체를 생성
     // 2) save: create한 객체를 저장
