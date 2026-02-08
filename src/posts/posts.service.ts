@@ -41,6 +41,7 @@ export class PostsService {
       },
       order: {
         createdAt: dto.order__createdAt,
+        id: dto.order__createdAt,
       },
       take: dto.take,
     });
