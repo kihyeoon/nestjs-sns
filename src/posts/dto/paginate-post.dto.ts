@@ -20,5 +20,5 @@ export class PaginatePostDto {
    */
   @IsNumber()
   @IsOptional()
-  take = 10;
+  take: number = 10;
 }

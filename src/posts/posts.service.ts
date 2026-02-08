@@ -5,6 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 import { PaginatePostDto } from './dto/paginate-post.dto';
+import { HOST, PORT, PROTOCOL } from 'src/common/const/env.const';
 
 export interface PostModel {
   id: number;
@@ -46,7 +47,34 @@ export class PostsService {
       take: dto.take,
     });
 
-    return posts;
+    /**
+     * 마지막 데이터의 id 값
+     * 해당되는 포스트가 0개 이상이면 마지막 포스트를 가져오고 아니면 Null 반환
+     */
+    const lastId = posts.length > 0 ? posts[posts.length - 1].id : null;
+
+    /**
+     * 다음 페이지 조회 시 사용할 URL
+     * 조회된 데이터가 take보다 적으면 마지막 페이지이므로 null
+     */
+    let nextUrl: string | null = null;
+
+    if (posts.length === dto.take) {
+      const url = new URL(`${PROTOCOL}://${HOST}:${PORT}/posts`);
+      url.searchParams.set('where__id_more_than', lastId!.toString());
+      url.searchParams.set('take', dto.take.toString());
+      url.searchParams.set('order__createdAt', dto.order__createdAt);
+      nextUrl = url.toString();
+    }
+
+    return {
+      data: posts,
+      cursor: {
+        after: lastId,
+      },
+      count: posts.length,
+      next: nextUrl,
+    };
   }
 
   async generatePosts(authorId: number) {
