@@ -21,7 +21,9 @@ export class UsersModel extends BaseEntity {
   @Column()
   @IsString()
   @Length(3, 8, { message: lengthValidationMessage })
-  @Exclude()
+  @Exclude({
+    toPlainOnly: true,
+  })
   password: string;
 
   @Column({
