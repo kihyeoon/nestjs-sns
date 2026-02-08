@@ -3,12 +3,13 @@ import { RolesEnum } from 'src/users/const/roles.const';
 import { Entity, Column, OneToMany } from 'typeorm';
 import { PostsModel } from 'src/posts/entities/posts.entity';
 import { BaseEntity } from 'src/common/entity/base.entity';
+import { lengthValidationMessage } from 'src/common/validation-message/length-validation-message';
 
 @Entity()
 export class UsersModel extends BaseEntity {
   @Column({ unique: true, length: 20 })
   @IsString()
-  @Length(1, 20)
+  @Length(1, 20, { message: lengthValidationMessage })
   nickname: string;
 
   @Column({ unique: true })
@@ -18,7 +19,7 @@ export class UsersModel extends BaseEntity {
 
   @Column()
   @IsString()
-  @Length(3, 8)
+  @Length(3, 8, { message: lengthValidationMessage })
   password: string;
 
   @Column({
