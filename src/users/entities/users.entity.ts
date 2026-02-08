@@ -4,7 +4,7 @@ import { Entity, Column, OneToMany } from 'typeorm';
 import { PostsModel } from 'src/posts/entities/posts.entity';
 import { BaseEntity } from 'src/common/entity/base.entity';
 import { lengthValidationMessage } from 'src/common/validation-message/length-validation-message';
-import { Exclude } from 'class-transformer';
+import { Exclude, Expose } from 'class-transformer';
 
 @Entity()
 export class UsersModel extends BaseEntity {
@@ -34,4 +34,9 @@ export class UsersModel extends BaseEntity {
 
   @OneToMany(() => PostsModel, (post) => post.author)
   posts: PostsModel[];
+
+  @Expose()
+  get nicknameAndEmail(): string {
+    return `${this.nickname} <${this.email}>`;
+  }
 }
