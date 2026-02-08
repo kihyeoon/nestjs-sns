@@ -46,6 +46,7 @@ const RAW_RUNTIME_STATE =
           ["@types/pg", "npm:8.16.0"],\
           ["@types/supertest", "npm:6.0.3"],\
           ["bcrypt", "npm:6.0.0"],\
+          ["class-transformer", "npm:0.5.1"],\
           ["class-validator", "npm:0.14.3"],\
           ["eslint", "virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:9.39.2"],\
           ["eslint-config-prettier", "virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:10.1.8"],\
@@ -2124,7 +2125,7 @@ const RAW_RUNTIME_STATE =
           ["@types/class-validator", null],\
           ["@types/reflect-metadata", null],\
           ["@types/rxjs", null],\
-          ["class-transformer", null],\
+          ["class-transformer", "npm:0.5.1"],\
           ["class-validator", "npm:0.14.3"],\
           ["file-type", "npm:21.3.0"],\
           ["iterare", "npm:1.2.1"],\
@@ -2236,7 +2237,7 @@ const RAW_RUNTIME_STATE =
           ["@types/class-validator", null],\
           ["@types/nestjs__common", null],\
           ["@types/reflect-metadata", null],\
-          ["class-transformer", null],\
+          ["class-transformer", "npm:0.5.1"],\
           ["class-validator", "npm:0.14.3"],\
           ["reflect-metadata", "npm:0.2.2"]\
         ],\
@@ -4394,6 +4395,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/cjs-module-lexer-npm-2.2.0-a4ea3b2e41-aec4ca58f8.zip/node_modules/cjs-module-lexer/",\
         "packageDependencies": [\
           ["cjs-module-lexer", "npm:2.2.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["class-transformer", [\
+      ["npm:0.5.1", {\
+        "packageLocation": "./.yarn/cache/class-transformer-npm-0.5.1-96b5161e6c-19809914e5.zip/node_modules/class-transformer/",\
+        "packageDependencies": [\
+          ["class-transformer", "npm:0.5.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -7649,6 +7659,7 @@ const RAW_RUNTIME_STATE =
           ["@types/pg", "npm:8.16.0"],\
           ["@types/supertest", "npm:6.0.3"],\
           ["bcrypt", "npm:6.0.0"],\
+          ["class-transformer", "npm:0.5.1"],\
           ["class-validator", "npm:0.14.3"],\
           ["eslint", "virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:9.39.2"],\
           ["eslint-config-prettier", "virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:10.1.8"],\
