@@ -1,11 +1,11 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { FindOptionsWhere, MoreThan, LessThan, Repository } from 'typeorm';
-import { PostsModel } from './entities/posts.entity';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CreatePostDto } from './dto/create-post.dto';
-import { UpdatePostDto } from './dto/update-post.dto';
-import { PaginatePostDto } from './dto/paginate-post.dto';
 import { HOST, PORT, PROTOCOL } from 'src/common/const/env.const';
+import { FindOptionsWhere, LessThan, MoreThan, Repository } from 'typeorm';
+import { CreatePostDto } from './dto/create-post.dto';
+import { PaginatePostDto } from './dto/paginate-post.dto';
+import { UpdatePostDto } from './dto/update-post.dto';
+import { PostsModel } from './entities/posts.entity';
 
 export interface PostModel {
   id: number;
@@ -36,6 +36,37 @@ export class PostsService {
   }
 
   async paginatePosts(dto: PaginatePostDto) {
+    if (dto.page) {
+      return this.pagePaginatePosts(dto);
+    } else {
+      return this.cursorPaginatePosts(dto);
+    }
+  }
+
+  async pagePaginatePosts(dto: PaginatePostDto) {
+    if (!dto.page) {
+      throw new BadRequestException('Page number is required');
+    }
+    /**
+     * 페이지네이션을 위한 로직을 구현합니다.
+     * data, total
+     */
+    const [posts, total] = await this.postsRepository.findAndCount({
+      skip: (dto.page - 1) * dto.take,
+      take: dto.take,
+      order: {
+        createdAt: dto.order__createdAt,
+        id: dto.order__createdAt,
+      },
+    });
+
+    return {
+      data: posts,
+      total,
+    };
+  }
+
+  async cursorPaginatePosts(dto: PaginatePostDto) {
     const where: FindOptionsWhere<PostsModel> = {};
     if (dto.where__id_more_than) {
       where.id = MoreThan(dto.where__id_more_than);

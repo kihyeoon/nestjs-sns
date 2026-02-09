@@ -1,6 +1,10 @@
 import { IsIn, IsNumber, IsOptional } from 'class-validator';
 
 export class PaginatePostDto {
+  @IsNumber()
+  @IsOptional()
+  page?: number;
+
   /**
    * 이전 마지막 데이터의 id 값보다 큰 데이터를 조회
    */
