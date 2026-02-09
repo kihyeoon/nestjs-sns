@@ -8,6 +8,10 @@ export class PaginatePostDto {
   @IsOptional()
   where__id_more_than?: number;
 
+  @IsNumber()
+  @IsOptional()
+  where__id_less_than?: number;
+
   /**
    * 생성일자 기준 오름차순 정렬 -> 내림/오름 구현 예정
    */
