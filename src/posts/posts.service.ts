@@ -1,7 +1,7 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { HOST, PORT, PROTOCOL } from 'src/common/const/env.const';
-import { FindOptionsWhere, LessThan, MoreThan, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
+import { CommonService } from 'src/common/common.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { PaginatePostDto } from './dto/paginate-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
@@ -21,6 +21,7 @@ export class PostsService {
   constructor(
     @InjectRepository(PostsModel)
     private readonly postsRepository: Repository<PostsModel>,
+    private readonly commonService: CommonService,
   ) {}
 
   async getAllPosts() {
@@ -36,86 +37,7 @@ export class PostsService {
   }
 
   async paginatePosts(dto: PaginatePostDto) {
-    if (dto.page) {
-      return this.pagePaginatePosts(dto);
-    } else {
-      return this.cursorPaginatePosts(dto);
-    }
-  }
-
-  async pagePaginatePosts(dto: PaginatePostDto) {
-    if (!dto.page) {
-      throw new BadRequestException('Page number is required');
-    }
-    /**
-     * 페이지네이션을 위한 로직을 구현합니다.
-     * data, total
-     */
-    const [posts, total] = await this.postsRepository.findAndCount({
-      skip: (dto.page - 1) * dto.take,
-      take: dto.take,
-      order: {
-        createdAt: dto.order__createdAt,
-        id: dto.order__createdAt,
-      },
-    });
-
-    return {
-      data: posts,
-      total,
-    };
-  }
-
-  async cursorPaginatePosts(dto: PaginatePostDto) {
-    const where: FindOptionsWhere<PostsModel> = {};
-    if (dto.where__id_more_than) {
-      where.id = MoreThan(dto.where__id_more_than);
-    } else if (dto.where__id_less_than) {
-      where.id = LessThan(dto.where__id_less_than);
-    }
-
-    const posts = await this.postsRepository.find({
-      where,
-      order: {
-        createdAt: dto.order__createdAt,
-        id: dto.order__createdAt,
-      },
-      take: dto.take,
-    });
-
-    /**
-     * 마지막 데이터의 id 값
-     * 해당되는 포스트가 0개 이상이면 마지막 포스트를 가져오고 아니면 Null 반환
-     */
-    const lastId = posts.length > 0 ? posts[posts.length - 1].id : null;
-
-    /**
-     * 다음 페이지 조회 시 사용할 URL
-     * 조회된 데이터가 take보다 적으면 마지막 페이지이므로 null
-     */
-    let nextUrl: string | null = null;
-
-    if (posts.length === dto.take) {
-      const url = new URL(`${PROTOCOL}://${HOST}:${PORT}/posts`);
-
-      if (dto.order__createdAt === 'ASC') {
-        url.searchParams.set('where__id_more_than', lastId!.toString());
-      } else {
-        url.searchParams.set('where__id_less_than', lastId!.toString());
-      }
-      url.searchParams.set('take', dto.take.toString());
-      url.searchParams.set('order__createdAt', dto.order__createdAt);
-      nextUrl = url.toString();
-    }
-
-    return {
-      data: posts,
-      cursor: {
-        after: lastId,
-      },
-      count: posts.length,
-      next: nextUrl,
-    };
+    return this.commonService.paginate(dto, this.postsRepository, { relations: ['author'] }, 'posts');
   }
 
   async generatePosts(authorId: number) {
@@ -133,8 +55,6 @@ export class PostsService {
   }
 
   async createPost(authorId: number, createPostDto: CreatePostDto) {
-    // 1) create: 저장할 객체를 생성
-    // 2) save: create한 객체를 저장
     const post = this.postsRepository.create({
       author: { id: authorId },
       ...createPostDto,
@@ -145,9 +65,6 @@ export class PostsService {
   }
 
   async updatePost(id: number, updatePostDto: UpdatePostDto) {
-    // Save 의 기능
-    // 1) 데이터가 존재하지 않는다면(id 기준) 새로 생성한다.
-    // 2) 같은 id 가 존재한다면 데이터를 업데이트 한다.
     const existingPost = await this.postsRepository.findOne({ where: { id } });
     if (!existingPost) {
       throw new NotFoundException('Post not found');
