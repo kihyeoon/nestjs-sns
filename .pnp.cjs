@@ -43,9 +43,11 @@ const RAW_RUNTIME_STATE =
           ["@types/bcrypt", "npm:6.0.0"],\
           ["@types/express", "npm:5.0.6"],\
           ["@types/jest", "npm:30.0.0"],\
+          ["@types/multer", "npm:2.0.0"],\
           ["@types/node", "npm:22.19.7"],\
           ["@types/pg", "npm:8.16.0"],\
           ["@types/supertest", "npm:6.0.3"],\
+          ["@types/uuid", "npm:11.0.0"],\
           ["bcrypt", "npm:6.0.0"],\
           ["class-transformer", "npm:0.5.1"],\
           ["class-validator", "npm:0.14.3"],\
@@ -67,7 +69,8 @@ const RAW_RUNTIME_STATE =
           ["tsconfig-paths", "npm:4.2.0"],\
           ["typeorm", "virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:0.3.28"],\
           ["typescript", "patch:typescript@npm%3A5.9.3#optional!builtin<compat/typescript>::version=5.9.3&hash=5786d5"],\
-          ["typescript-eslint", "virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:8.53.0"]\
+          ["typescript-eslint", "virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:8.53.0"],\
+          ["uuid", "npm:13.0.0"]\
         ],\
         "linkType": "SOFT"\
       }]\
@@ -2818,6 +2821,16 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@types/multer", [\
+      ["npm:2.0.0", {\
+        "packageLocation": "./.yarn/cache/@types-multer-npm-2.0.0-10a3c18289-375b0e77c4.zip/node_modules/@types/multer/",\
+        "packageDependencies": [\
+          ["@types/express", "npm:5.0.6"],\
+          ["@types/multer", "npm:2.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["@types/node", [\
       ["npm:22.19.7", {\
         "packageLocation": "./.yarn/cache/@types-node-npm-22.19.7-d4e0361572-0a4b13fd51.zip/node_modules/@types/node/",\
@@ -2916,6 +2929,16 @@ const RAW_RUNTIME_STATE =
           ["@types/methods", "npm:1.1.4"],\
           ["@types/superagent", "npm:8.1.9"],\
           ["@types/supertest", "npm:6.0.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@types/uuid", [\
+      ["npm:11.0.0", {\
+        "packageLocation": "./.yarn/cache/@types-uuid-npm-11.0.0-3f4d90d65a-6ebf1448d8.zip/node_modules/@types/uuid/",\
+        "packageDependencies": [\
+          ["@types/uuid", "npm:11.0.0"],\
+          ["uuid", "npm:13.0.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -7710,9 +7733,11 @@ const RAW_RUNTIME_STATE =
           ["@types/bcrypt", "npm:6.0.0"],\
           ["@types/express", "npm:5.0.6"],\
           ["@types/jest", "npm:30.0.0"],\
+          ["@types/multer", "npm:2.0.0"],\
           ["@types/node", "npm:22.19.7"],\
           ["@types/pg", "npm:8.16.0"],\
           ["@types/supertest", "npm:6.0.3"],\
+          ["@types/uuid", "npm:11.0.0"],\
           ["bcrypt", "npm:6.0.0"],\
           ["class-transformer", "npm:0.5.1"],\
           ["class-validator", "npm:0.14.3"],\
@@ -7734,7 +7759,8 @@ const RAW_RUNTIME_STATE =
           ["tsconfig-paths", "npm:4.2.0"],\
           ["typeorm", "virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:0.3.28"],\
           ["typescript", "patch:typescript@npm%3A5.9.3#optional!builtin<compat/typescript>::version=5.9.3&hash=5786d5"],\
-          ["typescript-eslint", "virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:8.53.0"]\
+          ["typescript-eslint", "virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:8.53.0"],\
+          ["uuid", "npm:13.0.0"]\
         ],\
         "linkType": "SOFT"\
       }]\
@@ -9823,6 +9849,13 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/uuid-npm-11.1.0-61d0d08928-34aa51b987.zip/node_modules/uuid/",\
         "packageDependencies": [\
           ["uuid", "npm:11.1.0"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:13.0.0", {\
+        "packageLocation": "./.yarn/cache/uuid-npm-13.0.0-29831a4f1f-950e4c18d5.zip/node_modules/uuid/",\
+        "packageDependencies": [\
+          ["uuid", "npm:13.0.0"]\
         ],\
         "linkType": "HARD"\
       }]\

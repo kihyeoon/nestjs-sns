@@ -18,6 +18,12 @@ export class PostsModel extends BaseEntity {
   @IsString({ message: 'content은 string 타입이어야 합니다.' })
   content: string;
 
+  @Column({
+    nullable: true,
+  })
+  @IsString({ message: 'imageUrl은 string 타입이어야 합니다.' })
+  image?: string;
+
   @Column()
   likeCount: number;
 
