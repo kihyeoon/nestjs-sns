@@ -32,6 +32,7 @@ const RAW_RUNTIME_STATE =
           ["@eslint/js", "npm:9.39.2"],\
           ["@nestjs/cli", "virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:11.0.16"],\
           ["@nestjs/common", "virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:11.1.12"],\
+          ["@nestjs/config", "virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:4.0.3"],\
           ["@nestjs/core", "virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:11.1.12"],\
           ["@nestjs/jwt", "virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:11.0.2"],\
           ["@nestjs/mapped-types", "virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:2.1.0"],\
@@ -2143,6 +2144,35 @@ const RAW_RUNTIME_STATE =
           "class-transformer",\
           "class-validator",\
           "reflect-metadata",\
+          "rxjs"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@nestjs/config", [\
+      ["npm:4.0.3", {\
+        "packageLocation": "./.yarn/cache/@nestjs-config-npm-4.0.3-0561a18540-95a701b4ec.zip/node_modules/@nestjs/config/",\
+        "packageDependencies": [\
+          ["@nestjs/config", "npm:4.0.3"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:4.0.3", {\
+        "packageLocation": "./.yarn/__virtual__/@nestjs-config-virtual-4f073384da/0/cache/@nestjs-config-npm-4.0.3-0561a18540-95a701b4ec.zip/node_modules/@nestjs/config/",\
+        "packageDependencies": [\
+          ["@nestjs/common", "virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:11.1.12"],\
+          ["@nestjs/config", "virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:4.0.3"],\
+          ["@types/nestjs__common", null],\
+          ["@types/rxjs", null],\
+          ["dotenv", "npm:17.2.3"],\
+          ["dotenv-expand", "npm:12.0.3"],\
+          ["lodash", "npm:4.17.23"],\
+          ["rxjs", "npm:7.8.2"]\
+        ],\
+        "packagePeers": [\
+          "@nestjs/common",\
+          "@types/nestjs__common",\
+          "@types/rxjs",\
           "rxjs"\
         ],\
         "linkType": "HARD"\
@@ -4864,6 +4894,23 @@ const RAW_RUNTIME_STATE =
           ["dotenv", "npm:16.6.1"]\
         ],\
         "linkType": "HARD"\
+      }],\
+      ["npm:17.2.3", {\
+        "packageLocation": "./.yarn/cache/dotenv-npm-17.2.3-2f9ab93ea1-c884403209.zip/node_modules/dotenv/",\
+        "packageDependencies": [\
+          ["dotenv", "npm:17.2.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["dotenv-expand", [\
+      ["npm:12.0.3", {\
+        "packageLocation": "./.yarn/cache/dotenv-expand-npm-12.0.3-97e438353d-0824bdc74f.zip/node_modules/dotenv-expand/",\
+        "packageDependencies": [\
+          ["dotenv", "npm:16.6.1"],\
+          ["dotenv-expand", "npm:12.0.3"]\
+        ],\
+        "linkType": "HARD"\
       }]\
     ]],\
     ["dunder-proto", [\
@@ -7140,6 +7187,13 @@ const RAW_RUNTIME_STATE =
           ["lodash", "npm:4.17.21"]\
         ],\
         "linkType": "HARD"\
+      }],\
+      ["npm:4.17.23", {\
+        "packageLocation": "./.yarn/cache/lodash-npm-4.17.23-50bdb1c01a-1264a90469.zip/node_modules/lodash/",\
+        "packageDependencies": [\
+          ["lodash", "npm:4.17.23"]\
+        ],\
+        "linkType": "HARD"\
       }]\
     ]],\
     ["lodash.includes", [\
@@ -7645,6 +7699,7 @@ const RAW_RUNTIME_STATE =
           ["@eslint/js", "npm:9.39.2"],\
           ["@nestjs/cli", "virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:11.0.16"],\
           ["@nestjs/common", "virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:11.1.12"],\
+          ["@nestjs/config", "virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:4.0.3"],\
           ["@nestjs/core", "virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:11.1.12"],\
           ["@nestjs/jwt", "virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:11.0.2"],\
           ["@nestjs/mapped-types", "virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:2.1.0"],\

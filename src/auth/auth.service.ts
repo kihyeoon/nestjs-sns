@@ -1,10 +1,11 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UsersModel } from 'src/users/entities/users.entity';
-import { HASH_ROUNDS, JWT_SECRET } from './const/auth.const';
 import { UsersService } from 'src/users/users.service';
 import { RegisterUserDto } from './dto/register-user.dto';
 import * as bcrypt from 'bcrypt';
+import { ConfigService } from '@nestjs/config';
+import { ENV_HASH_ROUNDS_KEY, ENV_JWT_SECRET_KEY } from 'src/common/const/env-keys.const';
 
 interface JwtPayload {
   email: string;
@@ -42,7 +43,22 @@ export class AuthService {
   constructor(
     private readonly jwtService: JwtService,
     private readonly usersService: UsersService,
+    private readonly configService: ConfigService,
   ) {}
+
+  private getJwtSecret() {
+    return this.configService.getOrThrow<string>(ENV_JWT_SECRET_KEY);
+  }
+
+  private getHashRounds() {
+    const hashRounds = Number(this.configService.getOrThrow<string>(ENV_HASH_ROUNDS_KEY));
+
+    if (Number.isNaN(hashRounds)) {
+      throw new Error(`${ENV_HASH_ROUNDS_KEY} must be a number`);
+    }
+
+    return hashRounds;
+  }
 
   /**
    * payload에 들어갈 정보
@@ -57,7 +73,7 @@ export class AuthService {
       type: isRefreshToken ? 'refresh' : 'access',
     };
     return this.jwtService.sign(payload, {
-      secret: JWT_SECRET,
+      secret: this.getJwtSecret(),
       expiresIn: isRefreshToken ? 3600 : 300,
     });
   }
@@ -91,7 +107,7 @@ export class AuthService {
   }
 
   async registerWithEmail(registerUserDto: RegisterUserDto) {
-    const hashedPassword = await bcrypt.hash(registerUserDto.password, HASH_ROUNDS);
+    const hashedPassword = await bcrypt.hash(registerUserDto.password, this.getHashRounds());
 
     const newUser = await this.usersService.createUser({
       ...registerUserDto,
@@ -150,7 +166,7 @@ export class AuthService {
   verifyToken(token: string) {
     try {
       return this.jwtService.verify<JwtPayload>(token, {
-        secret: JWT_SECRET,
+        secret: this.getJwtSecret(),
       });
     } catch (e) {
       if (e instanceof Error && e.name === 'TokenExpiredError') {
