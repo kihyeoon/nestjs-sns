@@ -82,3 +82,9 @@ Thumbs.db
 
 # Postgres
 postgres-data/
+
+# Uploads
+/public/*
+!/public/posts/
+/public/posts/*
+!/public/posts/.gitkeep

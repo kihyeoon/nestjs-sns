@@ -5825,7 +5825,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"multer@npm:2.0.2":
+"multer@npm:2.0.2, multer@npm:^2.0.2":
   version: 2.0.2
   resolution: "multer@npm:2.0.2"
   dependencies:
@@ -5909,6 +5909,7 @@ __metadata:
     eslint-plugin-prettier: "npm:^5.2.2"
     globals: "npm:^16.0.0"
     jest: "npm:^30.0.0"
+    multer: "npm:^2.0.2"
     pg: "npm:^8.17.2"
     prettier: "npm:^3.4.2"
     reflect-metadata: "npm:^0.2.2"

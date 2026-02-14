@@ -37,7 +37,12 @@ export class PostsService {
   }
 
   async paginatePosts(dto: PaginatePostDto) {
-    return this.commonService.paginate(dto, this.postsRepository, { relations: ['author'] }, 'posts');
+    return this.commonService.paginate(
+      dto,
+      this.postsRepository,
+      { relations: ['author'] },
+      'posts',
+    );
   }
 
   async generatePosts(authorId: number) {
@@ -54,12 +59,13 @@ export class PostsService {
     return this.postsRepository.save(posts);
   }
 
-  async createPost(authorId: number, createPostDto: CreatePostDto) {
+  async createPost(authorId: number, createPostDto: CreatePostDto, image?: string) {
     const post = this.postsRepository.create({
       author: { id: authorId },
       ...createPostDto,
       likeCount: 0,
       commentCount: 0,
+      image,
     });
     return await this.postsRepository.save(post);
   }

@@ -56,6 +56,7 @@ const RAW_RUNTIME_STATE =
           ["eslint-plugin-prettier", "virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:5.5.5"],\
           ["globals", "npm:16.5.0"],\
           ["jest", "virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:30.2.0"],\
+          ["multer", "npm:2.0.2"],\
           ["nestjs_server", "workspace:."],\
           ["pg", "virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:8.17.2"],\
           ["prettier", "npm:3.8.0"],\
@@ -7746,6 +7747,7 @@ const RAW_RUNTIME_STATE =
           ["eslint-plugin-prettier", "virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:5.5.5"],\
           ["globals", "npm:16.5.0"],\
           ["jest", "virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:30.2.0"],\
+          ["multer", "npm:2.0.2"],\
           ["nestjs_server", "workspace:."],\
           ["pg", "virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:8.17.2"],\
           ["prettier", "npm:3.8.0"],\
