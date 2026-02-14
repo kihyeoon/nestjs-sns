@@ -38,6 +38,7 @@ const RAW_RUNTIME_STATE =
           ["@nestjs/mapped-types", "virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:2.1.0"],\
           ["@nestjs/platform-express", "virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:11.1.12"],\
           ["@nestjs/schematics", "virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:11.0.9"],\
+          ["@nestjs/serve-static", "virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:5.0.4"],\
           ["@nestjs/testing", "virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:11.1.12"],\
           ["@nestjs/typeorm", "virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:11.0.0"],\
           ["@types/bcrypt", "npm:6.0.0"],\
@@ -54,6 +55,7 @@ const RAW_RUNTIME_STATE =
           ["eslint", "virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:9.39.2"],\
           ["eslint-config-prettier", "virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:10.1.8"],\
           ["eslint-plugin-prettier", "virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:5.5.5"],\
+          ["express", "npm:5.2.1"],\
           ["globals", "npm:16.5.0"],\
           ["jest", "virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:30.2.0"],\
           ["multer", "npm:2.0.2"],\
@@ -2342,6 +2344,45 @@ const RAW_RUNTIME_STATE =
         "packagePeers": [\
           "@types/typescript",\
           "typescript"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@nestjs/serve-static", [\
+      ["npm:5.0.4", {\
+        "packageLocation": "./.yarn/cache/@nestjs-serve-static-npm-5.0.4-47f1d1b892-e8cc02d4e9.zip/node_modules/@nestjs/serve-static/",\
+        "packageDependencies": [\
+          ["@nestjs/serve-static", "npm:5.0.4"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:5.0.4", {\
+        "packageLocation": "./.yarn/__virtual__/@nestjs-serve-static-virtual-865a4663de/0/cache/@nestjs-serve-static-npm-5.0.4-47f1d1b892-e8cc02d4e9.zip/node_modules/@nestjs/serve-static/",\
+        "packageDependencies": [\
+          ["@fastify/static", null],\
+          ["@nestjs/common", "virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:11.1.12"],\
+          ["@nestjs/core", "virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:11.1.12"],\
+          ["@nestjs/serve-static", "virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:5.0.4"],\
+          ["@types/express", "npm:5.0.6"],\
+          ["@types/fastify", null],\
+          ["@types/fastify__static", null],\
+          ["@types/nestjs__common", null],\
+          ["@types/nestjs__core", null],\
+          ["express", "npm:5.2.1"],\
+          ["fastify", null],\
+          ["path-to-regexp", "npm:8.3.0"]\
+        ],\
+        "packagePeers": [\
+          "@fastify/static",\
+          "@nestjs/common",\
+          "@nestjs/core",\
+          "@types/express",\
+          "@types/fastify",\
+          "@types/fastify__static",\
+          "@types/nestjs__common",\
+          "@types/nestjs__core",\
+          "express",\
+          "fastify"\
         ],\
         "linkType": "HARD"\
       }]\
@@ -7729,6 +7770,7 @@ const RAW_RUNTIME_STATE =
           ["@nestjs/mapped-types", "virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:2.1.0"],\
           ["@nestjs/platform-express", "virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:11.1.12"],\
           ["@nestjs/schematics", "virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:11.0.9"],\
+          ["@nestjs/serve-static", "virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:5.0.4"],\
           ["@nestjs/testing", "virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:11.1.12"],\
           ["@nestjs/typeorm", "virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:11.0.0"],\
           ["@types/bcrypt", "npm:6.0.0"],\
@@ -7745,6 +7787,7 @@ const RAW_RUNTIME_STATE =
           ["eslint", "virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:9.39.2"],\
           ["eslint-config-prettier", "virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:10.1.8"],\
           ["eslint-plugin-prettier", "virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:5.5.5"],\
+          ["express", "npm:5.2.1"],\
           ["globals", "npm:16.5.0"],\
           ["jest", "virtual:f3f4e503cc0038f6d32cfb25a5ffec2f7fb27afe11cfd547b9ce1599fce30c1d88d361277ae60642f324c7b979e963e99e84567010e31cde93b29870f405f226#npm:30.2.0"],\
           ["multer", "npm:2.0.2"],\
