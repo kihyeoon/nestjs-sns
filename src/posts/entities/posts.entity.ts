@@ -1,7 +1,7 @@
 import { Entity, Column, ManyToOne, JoinColumn } from 'typeorm';
 import { UsersModel } from 'src/users/entities/users.entity';
 import { BaseEntity } from 'src/common/entity/base.entity';
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 import { Transform } from 'class-transformer';
 import { POSTS_PUBLIC_IMAGE_PATH } from 'src/common/const/path.const';
 
@@ -24,8 +24,10 @@ export class PostsModel extends BaseEntity {
     nullable: true,
   })
   @IsString({ message: 'imageUrl은 string 타입이어야 합니다.' })
-  @Transform(({ value }: { value: string }) =>
-    value ? `/${POSTS_PUBLIC_IMAGE_PATH}/${value}` : value,
+  @IsOptional()
+  @Transform(
+    ({ value }: { value: string }) => (value ? `/${POSTS_PUBLIC_IMAGE_PATH}/${value}` : value),
+    { toPlainOnly: true },
   )
   image?: string;
 
