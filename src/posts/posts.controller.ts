@@ -18,10 +18,16 @@ import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 import { PaginatePostDto } from './dto/paginate-post.dto';
 import { ImageModelType } from 'src/common/entity/image.entity';
+import { DataSource } from 'typeorm';
+import { PostsImagesService } from './image/images.service';
 
 @Controller('posts')
 export class PostsController {
-  constructor(private readonly postsService: PostsService) {}
+  constructor(
+    private readonly postsService: PostsService,
+    private readonly imagesService: PostsImagesService,
+    private readonly datasource: DataSource,
+  ) {}
 
   @Get()
   async getPosts(@Query() paginatePostDto: PaginatePostDto) {
@@ -42,19 +48,35 @@ export class PostsController {
   @Post()
   @UseGuards(AccessTokenGuard)
   async createPost(@User('id') userId: number, @Body() body: CreatePostDto) {
-    const post = await this.postsService.createPost(userId, body);
+    const qr = this.datasource.createQueryRunner();
+    await qr.connect();
+    await qr.startTransaction();
+    try {
+      const post = await this.postsService.createPost(userId, body, qr);
 
-    if (body.images?.length) {
-      for (let i = 0; i < body.images.length; i++) {
-        await this.postsService.createPostImage({
-          post,
-          order: i,
-          path: body.images[i],
-          type: ImageModelType.POST_IMAGE,
-        });
+      if (body.images?.length) {
+        for (let i = 0; i < body.images.length; i++) {
+          await this.imagesService.createPostImage(
+            {
+              post,
+              order: i,
+              path: body.images[i],
+              type: ImageModelType.POST_IMAGE,
+            },
+            qr,
+          );
+        }
       }
+
+      await qr.commitTransaction();
+
+      return this.postsService.getPostById(post.id);
+    } catch (error) {
+      await qr.rollbackTransaction();
+      throw error;
+    } finally {
+      await qr.release();
     }
-    return this.postsService.getPostById(post.id);
   }
 
   @Put(':id')
