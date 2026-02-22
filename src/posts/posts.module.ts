@@ -6,9 +6,15 @@ import { PostsModel } from 'src/posts/entities/posts.entity';
 import { AuthModule } from 'src/auth/auth.module';
 import { UsersModule } from 'src/users/users.module';
 import { CommonModule } from 'src/common/common.module';
+import { ImageModel } from 'src/common/entity/image.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([PostsModel]), AuthModule, UsersModule, CommonModule],
+  imports: [
+    TypeOrmModule.forFeature([PostsModel, ImageModel]),
+    AuthModule,
+    UsersModule,
+    CommonModule,
+  ],
   controllers: [PostsController],
   providers: [PostsService],
 })

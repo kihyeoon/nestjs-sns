@@ -20,6 +20,7 @@ import {
 } from './common/const/env-keys.const';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { PUBLIC_FOLDER_PATH } from './common/const/path.const';
+import { ImageModel } from './common/entity/image.entity';
 
 @Module({
   imports: [
@@ -48,7 +49,7 @@ import { PUBLIC_FOLDER_PATH } from './common/const/path.const';
           username: configService.getOrThrow<string>(ENV_DB_USERNAME_KEY), // 데이터베이스 접속 사용자명
           password: configService.getOrThrow<string>(ENV_DB_PASSWORD_KEY), // 데이터베이스 접속 비밀번호
           database: configService.getOrThrow<string>(ENV_DB_DATABASE_KEY), // 사용할 데이터베이스 이름
-          entities: [PostsModel, UsersModel], // Entity 클래스 배열 (자동 매핑할 테이블)
+          entities: [PostsModel, UsersModel, ImageModel], // Entity 클래스 배열 (자동 매핑할 테이블)
           synchronize: true, // Entity와 DB 스키마 자동 동기화 (개발용, 프로덕션에서는 false)
         };
       },

@@ -9,6 +9,9 @@ import { PostsModel } from './entities/posts.entity';
 import { POSTS_IMAGE_PATH, TEMP_FOLDER_PATH } from 'src/common/const/path.const';
 import { promises } from 'node:fs';
 import { basename, join } from 'node:path';
+import { CreatePostImageDto } from 'src/posts/image/dto/create-image.dto';
+import { ImageModel } from 'src/common/entity/image.entity';
+import { DEFAULT_FIND_OPTIONS } from './const/default-find-options.const';
 
 export interface PostModel {
   id: number;
@@ -24,15 +27,13 @@ export class PostsService {
   constructor(
     @InjectRepository(PostsModel)
     private readonly postsRepository: Repository<PostsModel>,
+    @InjectRepository(ImageModel)
+    private readonly imageRepository: Repository<ImageModel>,
     private readonly commonService: CommonService,
   ) {}
 
-  async getAllPosts() {
-    return this.postsRepository.find({ relations: ['author'] });
-  }
-
   async getPostById(id: number) {
-    const post = await this.postsRepository.findOne({ where: { id }, relations: ['author'] });
+    const post = await this.postsRepository.findOne({ ...DEFAULT_FIND_OPTIONS, where: { id } });
     if (!post) {
       throw new NotFoundException('Post not found');
     }
@@ -40,12 +41,7 @@ export class PostsService {
   }
 
   async paginatePosts(dto: PaginatePostDto) {
-    return this.commonService.paginate(
-      dto,
-      this.postsRepository,
-      { relations: ['author'] },
-      'posts',
-    );
+    return this.commonService.paginate(dto, this.postsRepository, DEFAULT_FIND_OPTIONS, 'posts');
   }
 
   async generatePosts(authorId: number) {
@@ -66,14 +62,15 @@ export class PostsService {
     const post = this.postsRepository.create({
       author: { id: authorId },
       ...createPostDto,
+      images: [],
       likeCount: 0,
       commentCount: 0,
     });
     return await this.postsRepository.save(post);
   }
 
-  async createPostImage(image: string) {
-    const tempFilePath = join(TEMP_FOLDER_PATH, image);
+  async createPostImage(dto: CreatePostImageDto) {
+    const tempFilePath = join(TEMP_FOLDER_PATH, dto.path);
 
     try {
       await promises.access(tempFilePath);
@@ -86,9 +83,13 @@ export class PostsService {
     // 새로 이동할 포스트 폴더의 경로
     const newPath = join(POSTS_IMAGE_PATH, fileName);
 
+    const result = await this.imageRepository.save({
+      ...dto,
+    });
+
     await promises.rename(tempFilePath, newPath);
 
-    return fileName;
+    return result;
   }
 
   async updatePost(id: number, updatePostDto: UpdatePostDto) {
@@ -96,7 +97,10 @@ export class PostsService {
     if (!existingPost) {
       throw new NotFoundException('Post not found');
     }
-    return await this.postsRepository.save({ ...existingPost, ...updatePostDto });
+    const postDto: Omit<UpdatePostDto, 'images'> = updatePostDto;
+    Object.assign(existingPost, postDto);
+
+    return await this.postsRepository.save(existingPost);
   }
 
   async patchPost(id: number, updatePostDto: UpdatePostDto) {
@@ -105,7 +109,10 @@ export class PostsService {
       throw new NotFoundException('Post not found');
     }
 
-    return await this.postsRepository.save({ ...post, ...updatePostDto });
+    const postDto: Omit<UpdatePostDto, 'images'> = updatePostDto;
+    Object.assign(post, postDto);
+
+    return await this.postsRepository.save(post);
   }
 
   async deletePost(id: number) {
