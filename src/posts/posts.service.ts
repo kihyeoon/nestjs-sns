@@ -25,8 +25,10 @@ export class PostsService {
     private readonly commonService: CommonService,
   ) {}
 
-  async getPostById(id: number) {
-    const post = await this.postsRepository.findOne({ ...DEFAULT_FIND_OPTIONS, where: { id } });
+  async getPostById(id: number, qr?: QueryRunner) {
+    const repository = this.getRepository(qr);
+
+    const post = await repository.findOne({ ...DEFAULT_FIND_OPTIONS, where: { id } });
     if (!post) {
       throw new NotFoundException('Post not found');
     }
