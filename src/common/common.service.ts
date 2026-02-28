@@ -92,7 +92,9 @@ export class CommonService {
     const order = {} as FindOptionsOrder<T>;
 
     for (const [key, value] of Object.entries(dto)) {
-      if (value === undefined) {continue;}
+      if (value === undefined) {
+        continue;
+      }
 
       if (key.startsWith('where__')) {
         const { field, parsedValue } = this.parseWhereFilter(key, value);
@@ -106,10 +108,7 @@ export class CommonService {
     return { where, order };
   }
 
-  private parseWhereFilter(
-    key: string,
-    value: unknown,
-  ): { field: string; parsedValue: unknown } {
+  private parseWhereFilter(key: string, value: unknown): { field: string; parsedValue: unknown } {
     const parts = key.split('__');
     // parts[0] = 'where', parts[1] = field, parts[2] = operator (optional)
     const field = parts[1];
@@ -133,11 +132,7 @@ export class CommonService {
     return { field, parsedValue: mapFn(value) };
   }
 
-  private buildNextUrl(
-    dto: BasePaginationDto,
-    path: string,
-    lastId: number,
-  ): string {
+  private buildNextUrl(dto: BasePaginationDto, path: string, lastId: number): string {
     const protocol = this.configService.getOrThrow<string>(ENV_PROTOCOL_KEY);
     const host = this.configService.getOrThrow<string>(ENV_HOST_KEY);
     const port = this.configService.getOrThrow<string>(ENV_PORT_KEY);
@@ -145,7 +140,9 @@ export class CommonService {
     const url = new URL(`${protocol}://${host}:${port}/${path}`);
 
     for (const [key, value] of Object.entries(dto)) {
-      if (value === undefined || key === 'page') {continue;}
+      if (value === undefined || key === 'page') {
+        continue;
+      }
 
       if (key.startsWith('where__')) {
         const parts = key.split('__');
