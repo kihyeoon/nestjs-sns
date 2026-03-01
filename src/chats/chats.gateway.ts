@@ -28,7 +28,11 @@ export class ChatsGateway {
   }
 
   @SubscribeMessage('send_message')
-  sendMessage(@MessageBody() message: { message: string; chatId: number }) {
-    this.server.in(message.chatId.toString()).emit('receive_message', message.message);
+  sendMessage(
+    @MessageBody() message: { message: string; chatId: number },
+    @ConnectedSocket() socket: Socket,
+  ) {
+    // this.server.to(message.chatId.toString()).emit('receive_message', message.message);
+    socket.to(message.chatId.toString()).emit('receive_message', message.message);
   }
 }
